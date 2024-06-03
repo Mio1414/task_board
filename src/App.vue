@@ -1,5 +1,5 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  
   <TaskList title="Задачи в InordicIT"/>
 </template>
 
