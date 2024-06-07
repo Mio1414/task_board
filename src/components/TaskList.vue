@@ -26,10 +26,10 @@
         v-for="(task,index) in list" 
         v-bind:key='task'
         >
-          Задание {{index + 1}} {{ task.title}}
+          Задание {{index + 1}}. {{ task.title}}
           <button @click="dellTask(index)">Удалить</button>
           <!-- Сделать функцию, которую мы будем открывать в попапе текст и в нем редактировать -->
-          <button>Редактировать</button>
+          <button @click=" changeTask(index)">Редактировать</button>
         </li>
       </ul>
  
@@ -69,28 +69,47 @@ export default {
       srcList: [
         {
           id:'fddfjknfdj',
-          src:'https://klevtsovaelena.github.io/wallpaper/img/BlackWhite6.jpg'
+          src:'https://img1.akspic.ru/crops/9/9/4/1/4/141499/141499-priroda-nebo-gora-ledyanaya_forma-prirodnyj_landshaft-7680x4320.jpg'
         },
         {
           id:'fdvffvf',
-          src:'https://klevtsovaelena.github.io/wallpaper/img/BlackWhite5.jpg'
+          src:'https://img3.akspic.ru/crops/0/3/0/8/7/178030/178030-pejzazhnaya_zhivopis-zhivopis-42zapad-voda-oblako-3840x2160.jpg'
         },
         {
           id:'gbffhgnfdh',
-          src:'https://klevtsovaelena.github.io/wallpaper/img/BlackWhite9.jpg'
+          src:'https://img2.akspic.ru/crops/9/9/8/7/7/177899/177899-zakon-grafika-abstraktnoe_iskusstvo-3d_vizualizaciya-art-3840x2160.jpg'
         },
         {
           id:'fdvbdghvf',
-          src:'https://klevtsovaelena.github.io/wallpaper/img/BlackWhite10.jpg'
+          src:'https://img3.akspic.ru/crops/7/2/9/7/7/177927/177927-gora_everest-gora-sammit-gornyj_hrebet-planshet-3840x2160.jpg'
+        },
+        {
+          id:'fdfgdhj',
+          src:'https://img3.akspic.ru/crops/2/3/8/6/7/176832/176832-ladon-priroda-rastenie-list-nazemnoe_rastenie-3840x2160.jpg'
+        },
+        {
+          id:'fdfgdhj',
+          src:'https://img3.akspic.ru/crops/3/4/3/7/7/177343/177343-sentyabr-rozovyj-materialnoe_svojstvo-art-polutona_i_ottenki-3840x2160.jpg'
+        },
+        {
+          id:'fdfgdshj',
+          src:'https://img3.akspic.ru/crops/8/1/0/6/7/176018/176018-prirodnyj_zapovednik_ta_syua-zapadnyj_los_andzheles_buddijskij_hram-oblako-atmosfera-gora-3840x2160.jpg'
+        },
+        {
+          id:'fdfsfdj',
+          src:'https://img1.akspic.ru/crops/1/2/2/6/7/176221/176221-apelsin-dizajn-dnevnoe_vremya-priroda-lazurnyj-3840x2160.jpg'
+        },
+        {
+          id:'fdfsdsdj',
+          src:'https://img1.akspic.ru/crops/3/3/3/6/7/176333/176333-josemitskij_nacionalnyj_park-nacionalnyj_park-gora-oblako-ekoregion-3840x2160.jpg'
+        },
+        {
+          id:'fdfdsdsdhj',
+          src:'https://img3.akspic.ru/crops/4/1/5/6/7/176514/176514-list-melkij_fokus-rastenie-nazemnoe_rastenie-pochvopokrovnaya-3840x2160.jpg'
         }
+
       ],
-
-
-
-      qwert:'привет',
-      titleTask: 'Заголовок компонента',
-      select:'nohello',
-      test: "https://bagira-zoo.club/upload/iblock/2ed/2ed255a8ad64ecd9bd4f95670fbca466.jpg",
+         
       list:[
         {
           title:'Помыть посуду'
@@ -139,9 +158,27 @@ export default {
         return index !== indexItem
         
       })
+      
       // Обновить лист
       this.list = newList
     },
+    changeTask (){
+      event.preventDefault();
+      this.textNewTask = event.title; 
+      this.switchModel();
+      
+      // input.value = this.task.title;
+      
+      // const newList = this.list.filter((item, index) => {
+      //   console.log(e.title)
+        
+        //return e.title = newTitle
+        
+      // })
+      
+      // Обновить лист
+      // this.list = newList
+    }
     
   }
 }
@@ -155,18 +192,21 @@ body{
 .task-list{
   width: 30%;
   min-height: 400px;
-  background-color: white;
-  padding: 5px
+  background-color: rgba(255, 255, 255, 0.533);
+  padding: 5px;
+  border: 1px solid white;
+  border-radius: 10px;
 
 }
 .task-list ul{
   
   list-style: none;
   padding: 0;
+  color: white;
 }
 .task-list li{
   text-align: left;
-  background-color: rgb(226, 226, 225);
+  background-color: rgb(122, 122, 122);
   padding: 5px 15px;
   margin: 15px 30px;
   cursor: pointer;
