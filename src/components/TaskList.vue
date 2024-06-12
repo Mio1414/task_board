@@ -18,7 +18,7 @@
     </div>
 
    
-    <button @click="switchModel">Добавить задание</button>
+    <button @click="switchModel('add')">Добавить задание</button>
   
     <div class="task-list">
       <ul>
@@ -29,7 +29,7 @@
           Задание {{index + 1}}. {{ task.title}}
           <button @click="dellTask(index)">Удалить</button>
           <!-- Сделать функцию, которую мы будем открывать в попапе текст и в нем редактировать -->
-          <button @click=" changeTask(index)">Редактировать</button>
+          <button @click=" popupp[currentPopupp].click()">{{popupp[currentPopupp].textInButton}}</button>
         </li>
       </ul>
  
@@ -39,11 +39,11 @@
       <div>
 
         <form>
-          <button class="close" @click="switchModel">Закрыть</button>
+          <button class="close" @click="switchModel('close')">Закрыть</button>
           <div class="form-content">
-            <div>Добавить задание:</div>
+            <div>{{popupp[currentPopupp].titel}}:</div>
             <div><input type="text" v-model="textNewTask"></div>
-            <button @click="addTask">Добавить</button>
+            <button @click="popupp[currentPopupp].click()">{{popupp[currentPopupp].textInButton}}</button>
           </div>
         </form>
       </div>
@@ -60,6 +60,19 @@ export default {
   name: 'task-list',
   data() {
     return{
+      currentPopupp:'add',
+      popupp:{
+        add:{
+          titel: 'Добавить задание',
+          click: this.addTask,
+          textInButton: 'Добавить'
+        },
+        edit:{
+          titel: 'Редатировать задание',
+          click: this.editTask,
+          textInButton: 'Сохранить'
+        }
+      },
       textNewTask:'',
       isShowModel: false,
       currentPageBg:0,
@@ -136,8 +149,24 @@ export default {
     //  нужно обновить состояние
     this.currentPageBg = newIndex
     },
-    switchModel(){
-      this.isShowModel = !this.isShowModel;
+    switchModel(type){
+      this.currentPopupp = type
+      switch(type){
+        case 'close':
+          this.isShowModel = !this.isShowModel;
+          
+          break;
+        case 'edit':
+            this.isShowModel = !this.isShowModel;
+            
+          break;
+        case 'add':
+          this.isShowModel = !this.isShowModel;
+          
+          break;
+
+      }
+      
     },
     addTask(){
       // Остановить событие
@@ -149,7 +178,7 @@ export default {
         title: textInInput
       }
       this.list.push(newObject);
-      this.switchModel();
+      this.switchModel('close');
     },
     // вызовем функцию для закрытия окна
     dellTask (index){
@@ -162,7 +191,7 @@ export default {
       // Обновить лист
       this.list = newList
     },
-    changeTask (){
+    editTask (){
       event.preventDefault();
       this.textNewTask = event.title; 
       this.switchModel();
@@ -178,7 +207,7 @@ export default {
       
       // Обновить лист
       // this.list = newList
-    }
+    },
     
   }
 }
